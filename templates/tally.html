@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel ="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/tallydesign.css" media="all" />
+    <title>Tally Order {{ billno }}</title>
+    <button class="btn btn-success" onclick="postit()" style="float: right; margin: auto;">Done</button>
+
+</head>
+<body>
+    <h3>Tally the order.</h3>
+    <div class="details" style="border: 1px solid black; height:10%">
+        <h4>Customer: {{ cust['name'] }}</h4>
+        <h4>Order Date: {{ cart[0]['date'] }}</h4>
+    </div>
+    <table style="width: 50%; margin:auto;" id= 'tallytable'>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="service">Product</th>
+            <th class="desc">quantity</th>
+            <th>Rate</th>
+            <th>Input</th>
+          </tr>
+        </thead>
+        <tbody>
+    {% for j in cart[1:] %}
+          <tr>
+            <td><input type="checkbox" onclick="disableinp('{{ j['rsgid'] }}', {{ j['quantity'] }})"></td>
+            <td class="desc">{{ j['name'] }}</td>
+            <td class="qty">{{ j['quantity'] }}</td>
+            <td class="rate">{{ j['rate'] }}</td>
+            <td class="classinput">
+            <input type="text" name="elseinput" id={{ j['rsgid'] }}></td>
+            </tr>
+    {% endfor %}
+        </tbody>
+        
+        <form method="POST">
+          <input type='text' class = 'tallysubmitter', id= 'fillme' name='iamhere' style="display: none;">
+          <button id ='clickclak', style="display: none;">POST</button>
+      </form>
+        <script src = 'static/js/javascript.js'></script>
+</body>
+</html>

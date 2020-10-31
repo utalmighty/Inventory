@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Inventory Control login</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    </head>
+    <nav  style="text-align: right;">
+                <a href='/'>Home</a>
+        </nav>
+    <body  align = 'center'; style="font-family: Courier New;">
+        <form method="POST"> <!-- getmethod will also change url-->
+            <p>
+                <b><u>Enter Details to login the Database:</u></b><br>
+                <br>
+                Login ID:<input type="text" name="Login" />
+                <br>
+                <br>
+                Password:<input type="password" name="pass" />
+                
+                <select name="cars">
+                    <option value="Utkarsh">Utkarsh</option>
+                    <option value="Anurag">Anurag</option>
+                    <option value="Astitva">Astitva</option>
+                    <option value="Krishna">Krishna</option>
+                </select>
+                <!-- <textarea name="Login ID" cols="25" rows="1">Login ID</textarea>
+                <br>
+                <br>
+                <textarea name="Password" cols="25" rows="1">Password</textarea>-!-->
+            </p>
+        
+            <p>
+                <button>Login</button>
+            </p>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                 <div class="alert alert-danger" style="margin:auto; width:30%; text-align:center;">
+                        <strong>Warning!</strong> {{ message }}
+                      </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </body>
+</html>

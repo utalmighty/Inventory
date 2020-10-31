@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Inventory Control</title>
+    </head>
+    <nav  style="text-align: right;">
+                
+                <a href='/Login'>Login</a>
+                &nbsp;
+                <a href='/'>Refresh</a>
+
+        </nav>
+        <style>
+            body {
+            background: linear-gradient(-45deg, #e66f4b, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        </style>
+    <body>
+        
+        <h1 style="font-family: Courier New;"><u><B>Welcome to Inventory.</B></u></h1>
+        
+        <br>
+        <br>
+        <h2 style="font-family: Courier New;">Current date and time:  <b><u>{{current_date}}</u> <u> {{current_time}}.</u></b></h2>
+
+    </body>
+</html>

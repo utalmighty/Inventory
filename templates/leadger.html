@@ -1,0 +1,42 @@
+<div style="scrollable;
+height: 250px;
+overflow-x: hidden;
+overflow-y: scroll;
+margin-left: 2cm;">
+<table id="header-fixed">  
+<thead >
+<tr>
+<td style="font-family: 'Times New Roman', Times, serif;"><b>NAME</b></td>
+</tr>
+</thead>
+<tbody>
+{%for i in x%}
+<tr>
+<td>{{ i }}</td>
+</tr>
+{% endfor %}  
+</tbody>
+
+</table>
+<style>
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    text-align: left;
+    padding: 16px;
+  }
+  td{
+    text-align: left;
+    padding: 16px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+</style>
+</div>

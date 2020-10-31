@@ -1,0 +1,185 @@
+
+<html>
+    <head>
+        <title>Transaction</title>
+        <link rel ="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    </head>
+    <body style="background: wheat;">
+        <div class="Transactionheading" style="text-align: center;">
+            <button class="btn btn-info" style="padding:5px; margin: 5px ;width: 2cm; float:right;" onclick="c = confirm('Skip? Transaction will be incomplete.'); if(c == true){window.location.href='http://192.168.1.9:5000/Dashboard'}">Skip</button>
+            <button class="btn btn-primary" style="padding:5px; margin: 5px ;width: 2cm; float:right;" onclick="inspect()">Pay</button>
+            <h2>Transaction</h2>
+            
+        </div>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger" style="text-align:center; margin:auto; width:30%;">
+                    <strong>Warning!</strong> {{ message }}
+                  </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class = 'full' style="border: 1px solid black; margin: auto;">
+            <div class="details" style="border: 1px solid black; height:10%">
+            <h4>Customer: {{ li[0]['name'] }}</h4>
+            <h4>GST Number: {{ li[0]['gst'] }}</h4>
+            
+            </div>
+        <div class="table" style="border: 1px solid black; height: 60%; display: flex; justify-content: center; background-color: lightblue;">
+            <div class='sublist' style="overflow-x:auto;" >
+                <table  id = "tableid"  style="border: 1px solid black;">
+                    <tbody id='sublistid'>
+                        <tr>
+                            <th style="background: lightcyan;
+                            position: sticky;
+                            padding-left:  1cm;
+                            padding-right: 1cm;
+                            color: black;
+                            top: 0;
+                            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);">
+                                <b> Date </b>
+                            </th>
+                            <th style="background: lightcyan;
+                            position: sticky;
+                            color: black;
+                            top: 0;
+                            padding-left:  1cm;
+                            padding-right: 1cm;
+                            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);">
+                                <b> ID </b>
+                            </th>
+                            <th style="background: lightcyan;
+                            position: sticky;
+                            color: black;
+                            padding-left:  1cm;
+                            padding-right: 1cm;
+                            top: 0;
+                            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);">
+                                <b> Paid Amount </b>
+                            </th>
+                            <th style="background: lightcyan;
+                            position: sticky;
+                            color: black;
+                            top: 0;
+                            padding-left:  1cm;
+                            padding-right: 1cm;
+                            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);">
+                                <b> Bill Amount </b>
+                            </th>
+                        </tr>
+                        {% for i in table %}
+                            <tr>
+                                <td>
+                                    {{ i[1].date() }}
+                                </td>
+                                <td align="center">
+                                    {% if i[2] =='-' %}
+                                    <a href="http://192.168.1.9:5000/invoice={{ i[0] }}" target="_blank">{{ i[0] }}</a>
+                                    {% else %}
+                                    {{ i[0] }}
+                                    {% endif %}
+                                </td>
+                                <td align="center" class= 'transactionamount'>
+                                    {{ i[2] }}
+                                </td>
+                                <td align="center" class="billamount">
+                                    {{ i[3] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+                <strong id= 'due' style="float: right; padding: 4px; background-color: rgb(69, 243, 199);"></strong>
+            </div>
+            
+        </div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                 <div class="alert alert-danger" style="text-align:center; margin:auto; width:30%;">
+                        <strong>Warning!</strong> {{ message }}
+                      </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+            <div class="transaction" style="border: 1px solid black; height:20%">
+                <form method="POST">
+                    <div class="amount" style="padding: 5px; float:left">
+                    <input id="amountid" type="number" step=".01" name="amountname" min="0" autocomplete="off" placeholder="Amount" required/>
+                    </div>
+                    <div class='selectmodeclassdiv' id='seletmodeiddiv' style="padding: 5px; width: 50%;top: 25%;margin: 0 auto;position: relative;">
+                        Mode: <select id='selectmodeid' name="selectmode">
+                            <option value="cash" > CASH </option>
+                            <option value="cheq"> Cheque </option>
+                            <option value="R/N"> RTGS/NEFT </option>
+                            <option value="othr">Other...</option>
+                        </select>
+                    </div>
+                    <div class="description" style="margin:5px;">
+                        <textarea id='desid' name="descriptionna47me" type="text" cols="28" rows="3" maxlength="50" placeholder="Description"></textarea>
+                    </div>
+                    <input type="password" id="passwordid" name = "passwordname" style="display: none;"  autocomplete="off" required />
+                    <button id="clicker" style="display: none;">click</button>
+                </form>
+                
+            </div>
+            
+        </div>
+        
+        <script>
+            x = document.getElementById('tableid').getElementsByTagName('td');
+            sum = 0;
+            for (i= 0; i < x.length; i++){
+                if(x[i].className == 'billamount'){
+                    if(x[i].innerHTML.trim() != '-'){
+                        sum += parseFloat(x[i].innerHTML);
+                    }
+                }
+                else if(x[i].className == 'transactionamount'){
+                if(x[i].innerHTML.trim() != '-'){
+                    sum -= parseFloat(x[i].innerHTML);
+                    }
+                }  
+            } 
+            document.getElementById('due').innerHTML = "Due: ₹ "+sum.toFixed(2);
+            
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }
+
+
+            function inspect(){
+                amt = document.getElementById('amountid').value;
+                if(amt>0){
+                    
+                    mode = document.getElementById('selectmodeid').value;
+                    if (mode != 'cash'){
+                        des = document.getElementById('desid').value;
+                        if (des == ''){
+                            alert('Enter description of mode.');
+                        }
+                        else{
+                            y = prompt("Proceed to pay ₹" +amt+"? Enter Password.");
+                            document.getElementById('passwordid').value=y;
+                            document.getElementById('clicker').click();
+                        }    
+                    }
+                    else{
+                            y = prompt("Proceed to pay ₹" +amt+"? Enter Password.");
+                            document.getElementById('passwordid').value=y;
+                            document.getElementById('clicker').click();
+                        }   
+                }
+                else{
+                    alert("Amount should be greater than 0!");
+                }
+            }
+    function alerthim(){
+        alert('Wrong Password');
+    }
+        </script>
+    </body>
+    </html>

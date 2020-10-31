@@ -1,0 +1,50 @@
+<html>
+    <head>
+
+        <title>Add ITEM.</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+    <nav  style="text-align: right;">
+                <a href='/Dashboard'>Dashboard</a>
+        </nav>
+    <body style="font-family: Courier New;">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                 <div class="alert alert-success" style="text-align:center; margin:auto; width:30%;">
+                        <strong>Success!</strong> {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="POST"> <!-- getmethod will also change url-->
+            <p>
+                <b><u>Enter Details of ITEM:</u></b><br>
+                <br>
+               
+                Name*:<input type="text" name="name" required /> Brand:<input type="text" name="Brand"  required/> 
+                <br>
+                <br>
+                HSN Code:<input type="number" name="hsn" pattern="[0-9]{3}[0-9]{3}" required/> Price:<input type="number" name="Price" step="0.01" />
+                <br>
+                <br>
+                Godown: <select name="Place"><option value="Shop">Shop</option>  <option value="Complex">Complex</option><option value="Dubbgaa">Dubbgaa</option></select>
+                <br>
+                <br>
+                Size:<input type="number" name="size" /> Unit of Size:<input type="text" name="unit" />
+                <br>
+                <br>
+                Quantity:<input type="number" name="Quantity" />
+                    <br>
+                    <br>
+                    
+                
+            </p>
+        
+            <p>
+                <button>Submit</button>
+            </p>
+        </form>
+        <script src = 'static/js/javascript.js'></script>
+    </body>
+</html>

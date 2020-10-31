@@ -1,0 +1,98 @@
+
+<html>
+    <head>
+        <title>ORDER</title>
+        <link rel ="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/design.css">
+    </head>
+    <body>
+        <h2>Place Order</h2>
+        <div class="full">
+            <div class='main' id= 'mains'>
+                <div class='customerfull'>
+                    <div id= 'hello' class = 'customer-selector'>
+                        <select id='customerslist' name="customer">
+                            <option selected="1" value="" disabled="1">--Select Customer--</option>
+                                {%for i in li%}
+                                <option id = 'selected', value={{ i['rscid'] }}>{{ i['name']+' '+ i['address'] }}</option>
+                                {% endfor %}
+                        </select>
+                        <br>
+                        <div>
+                            <button class = "btn btn-primary" onclick="getdetails({{ li }})">Details</button>
+                        </div>
+                        <script src = 'static/js/javascript.js'></script>
+                    </div>
+
+                    <div id = 'dtls' class= 'details'></div>
+                </div>
+
+                <div class='order' id='orderid'>
+                    <div class='selectororder' id='seletororderid'>
+                        <select onchange="resets({{ good }})" id='goodlist' name="goods" required>
+                            <option selected="1" value="" disabled="1">--Select ITEM--</option>
+                            {% for i in good %}
+                            <option id='selected', value={{ i['rsgid']}}>{{ i['name']+' '+i['size'] }}</option>
+                            {% endfor %}  
+                        </select>
+                    </div>
+
+                    <div class="quantity" >
+                        Quantity:<input id="quantityid" type="number" name="qty" min="1" required/>
+                        <div id='quantityshow'></div>
+                    </div>
+
+                    <div class="rate" >
+                        Rate:<input id="rateid" type="number" name="namerate" min="1" required/> 
+                    </div>
+
+                    <div class="gst" >
+                        GST rate:<input type="number" id="gstid" name="namegst" min="0" max='28' value=0/> 
+                    </div>
+                    <div id = 'forbutton'>
+                        <button class="btn btn-success" onclick="sendit({{ good }})">ADD</button>
+                    </div>
+                </div>
+            </div>
+            <div class="list" id="listid">
+                <div class="cartname">
+                    <h2>Cart</h2>
+                </div>
+                    <div class='sublist' style="overflow-x:auto;" >
+                        <table  >
+                            <tbody id='sublistid'>
+                                <tr>
+                                    <th>
+                                        <b> Name </b>
+                                    </th>
+                                    <th>
+                                        <b> Quantity </b>
+                                    </th>
+                                    <th>
+                                        <b> Rate </b>
+                                    </th>
+                                    <th>
+                                        <b> GST Amt</b>
+                                    </th>
+                                    <th>
+                                        <b> Sub-total </b>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="buttoner" align='right'>
+                        Additional Cost:<input id='additional' type="number" style="width: 20%" value=0>
+                        Transport:<input id='transport' maxlength="7" style="width: 20%">
+                        <button class="btn btn-info" onclick="poster()">Check Out!</button>
+                    </div>
+            </div>
+        </div>
+        <div class='submitter'>
+                <form method="POST">
+                    <input id="getme" type="none" name="sender" min="0" required/>
+                    <button type="submit" id="clickmeautomatic">Click</button>
+                </form>
+        </div>
+    </body>
+</html>

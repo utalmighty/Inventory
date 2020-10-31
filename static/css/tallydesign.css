@@ -1,0 +1,20 @@
+th, td {
+    color: black;
+    text-align: left;
+    padding: 10px;
+}
+
+th {
+    background: rgb(234, 151, 255);
+    position: sticky;
+    color: black;
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+tr:nth-child(even) {
+    background-color: rgba(128, 128, 128, 0.671);
+}
+table td.rate{
+    font-size: small;
+    font-weight: lighter;
+}

@@ -1,0 +1,48 @@
+.pending{
+    background-color: pink;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+}
+.pending tr{
+    border-bottom: 1px solid rgb(209, 104, 195);
+}
+
+.billdate{
+    font-family:  'Calibri';
+    font-size: smaller;
+   font-weight: lighter;
+   text-align: center;
+}
+.cust{
+    font-family: 'Calibri';
+    white-space: nowrap;
+    font-size: medium;
+    font-weight: normal;
+    text-align: center;
+}
+
+.due{
+    
+    background-color: rgb(195, 229, 143);
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.due tr{
+    border-bottom: 1px solid green;
+}
+
+.outstanding{
+    font-family:  'Calibri';
+    font-size: smaller;
+   font-weight: lighter;
+   text-align: right;
+}
+.phone{
+    font-family:  'Calibri';
+    font-size: small;
+   font-weight: lighter;
+   text-align: center;
+}

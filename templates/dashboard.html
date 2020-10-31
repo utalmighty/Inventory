@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>Logged IN.</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/dashboard.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src = 'static/js/javascript.js'></script>
+
+    </head>
+    
+</p>
+    <nav  style="text-align: right;">
+        <a href='/logout'>Logout</a>
+</nav>
+<body  style="font-family: Courier New; text-align: center;">
+    <p>Hello World!, Welcome to the future!, Dashboard</p>
+    <li><a href='/New_Customer'>Add Customer</a></li>
+    <li><a href='/inventory'>Inventory</a></li>
+    <li><a href='/leadger'>Leadger</a></li>
+    <li><a href='/order'>Order</a></li>
+    <li><a href='/devmode'>Developer Mode</a></li>
+    <button class="btn btn-link" data-toggle="modal" data-target="#myModal">Pay Bill</button>
+  <!--  Transaction Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Choose Customer</h4>
+        </div>
+        <div class="modal-body">
+          <div id= 'hello' class = 'customer-selector'>
+            <select id='customerslist' name="customer">
+                <option selected="1" value="" disabled="1">--Select Customer--</option>
+                    {%for i in li%}
+                    <option id = 'selected', value={{ i['rscid'] }}>{{ i['name']+' '+ i['address'] }}</option>
+                    {% endfor %}
+            </select>
+            <br>
+            <div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" onclick="movetotrans()">Continue</button>
+        </div>
+      </div>      
+    </div>
+  </div>
+ <!--  Transaction Modal  END -->
+</div>
+</div>
+
+
+<div class="Quick_Tools">
+    <div class = 'pending' style="overflow-y: scroll; overflow-x: hidden; width: 33%;">
+        <table style="margin:auto">
+            <thead> 
+                <tr><u>Pending Orders</u></tr>
+            </thead>
+            <tbody>
+            {% for i in ta %}
+                <tr style="cursor: pointer;">
+                  <td>
+                    <div class='billdate'>{{ i['date'].date() }}</div>
+                    <div class="cust"><a href="http://192.168.1.9:5000/tally={{ i['bill_no'] }}">{{ i['name']+' '+i['address'] }}</a></div>
+                  </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+</div>
+
+<div class = 'due' style="overflow-y: scroll; overflow-x: hidden; width: 33%;">
+  <table style="margin:auto">
+      <thead> 
+          <tr><u>Due Payments</u></tr>
+      </thead>
+      <tbody>
+      {% for i in un %}
+          <tr style="cursor: pointer;">
+            <td>
+              <div class="cust"><a href="http://192.168.1.9:5000/transaction/{{ i['rscid'] }}">{{ i['name'] }}</a></div>
+              <div class='phone'>Contact- {{ i['phone'] }}</div>
+              <div class='outstanding'>₹ {{ i['outstanding'] }}</div>
+            </td>
+          </tr>
+      {% endfor %}
+  </tbody>
+  </table>
+</div>
+</div>
+
+
+</body>
+</html>

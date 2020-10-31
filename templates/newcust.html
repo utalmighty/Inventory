@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>New Customer</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+    <nav  style="text-align: right;">
+                <a href='/'>Home</a>
+                <a href='/Dashboard'>Dashboard</a>
+        </nav>
+    <body style="font-family: Courier New;">
+        <form method="POST" autocomplete="off"> <!-- getmethod will also change url-->
+            <p>
+                <b><u>Enter Details of Customer:</u></b><br>
+                <br>
+                First Name*:<input type="text" name="First" maxlength="10" required /> Last Name:<input type="text" name="Last" maxlength="10"/> 
+                <br>
+                <br>
+                Phone Number:<input type="tel" name="phone" pattern="[0-9]{2}[0-9]{4}[0-9]{4}" maxlength="10" required/> 
+                <br>
+                <br>
+                Shop Name:<input type="text" name="shop" maxlength="12"/>
+                <a>Address:</a>
+                <textarea name="Address" cols="25" rows="2" maxlength="15"></textarea>
+                <br>
+                <br>
+                GST Number:<input type="text" name="gst" maxlength="15"/>
+                <!-- <textarea name="Login ID" cols="25" rows="1">Login ID</textarea>
+                <br>
+                <br>
+                <textarea name="Password" cols="25" rows="1">Password</textarea>-!-->
+            </p>
+        
+            <p>
+                <button>Submit</button>
+            </p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                 <div class="alert alert-success" style="text-align:center; margin:auto; width:30%;">
+                        <strong>Success!</strong> {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        </form>
+        <script src = 'static/js/javascript.js'></script>
+    </body>
+</html>
