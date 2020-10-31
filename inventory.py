@@ -8,7 +8,7 @@ import psycopg2 as postgres
 import webbrowser
 
 transaction_password = 'papa'
-connect = postgres.connect(dbname = 'utalmighty', user = 'postgres', password = 'utkarshin10')
+connect = postgres.connect(dbname = 'utalmighty', user = 'postgres', password = 'yourpassword')
 #connect = sqlite3.connect(':memory:')
 
 # cust_inst = ['RSCID', 'First_name','Last_name','Phone', 'Address', 'Shop_name', 'GST_No_adhar']
